@@ -1,0 +1,177 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { MapPin, Clock, ArrowRight, MousePointer2 } from 'lucide-react';
+
+// Animation variants for consistency
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+};
+
+const LuneAtelier = () => {
+  return (
+    <div className="bg-[#0A0A0A] text-[#E5E5E5] selection:bg-[#D4AF37] selection:text-black font-mono overflow-x-hidden">
+      
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-8 md:px-12 mix-blend-difference">
+        <div className="text-2xl font-bold tracking-tighter uppercase italic">Lune.</div>
+        <div className="hidden md:flex gap-12 text-[10px] tracking-[0.3em] uppercase">
+          <a href="#phases" className="hover:text-[#D4AF37] transition-colors">The Phases</a>
+          <a href="#menu" className="hover:text-[#D4AF37] transition-colors">Midnight Menu</a>
+          <a href="#location" className="hover:text-[#D4AF37] transition-colors">Location</a>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
+        {/* Background Overlay (Simulating the Coastal Night) */}
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-900/40 via-black to-black"></div>
+        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5 }}
+          className="z-10"
+        >
+          <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif tracking-[0.2em] mb-6 uppercase">
+            The Dark Side <br /> <span className="italic">of Brew.</span>
+          </h1>
+          <p className="text-xs md:text-sm tracking-[0.5em] uppercase mb-12 text-zinc-500">
+            Phase 8’s after-hours sanctuary for the discerning.
+          </p>
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-10 py-4 border border-zinc-700 hover:border-white transition-all duration-500 group relative"
+          >
+            <span className="text-[10px] tracking-[0.4em] uppercase relative z-10">Enter the Void</span>
+            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+          </motion.button>
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="absolute bottom-10 flex flex-col items-center gap-4 opacity-30"
+        >
+          <div className="w-[1px] h-12 bg-white"></div>
+        </motion.div>
+      </section>
+
+      {/* The Phases (About) */}
+      <section id="phases" className="py-32 px-6 md:px-24 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 border-t border-zinc-900 pt-24">
+          <motion.div {...fadeInUp} className="space-y-6">
+            <span className="text-[#D4AF37] text-xs">I.</span>
+            <h3 className="text-2xl font-serif tracking-widest uppercase">The Silence</h3>
+            <p className="text-zinc-500 leading-relaxed text-sm">
+              Acoustic-treated walls engineered for the low-frequency murmur of deep conversation. No noise. Only clarity.
+            </p>
+          </motion.div>
+
+          <motion.div {...fadeInUp} transition={{ delay: 0.2 }} className="space-y-6">
+            <span className="text-[#D4AF37] text-xs">II.</span>
+            <h3 className="text-2xl font-serif tracking-widest uppercase">The Stone</h3>
+            <p className="text-zinc-500 leading-relaxed text-sm">
+              Hand-cut black basalt counters. Minimalist seating carved for long-form contemplation. An architectural embrace.
+            </p>
+          </motion.div>
+
+          <motion.div {...fadeInUp} transition={{ delay: 0.4 }} className="space-y-6">
+            <span className="text-[#D4AF37] text-xs">III.</span>
+            <h3 className="text-2xl font-serif tracking-widest uppercase">The Creek</h3>
+            <p className="text-zinc-500 leading-relaxed text-sm">
+              Floor-to-ceiling glass offering an unobstructed gaze into the Karachi Creek. The moon reflected on the water, twice.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Midnight Menu */}
+      <section id="menu" className="py-32 bg-[#0C0C0C]">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="mb-24 text-center">
+            <h2 className="text-3xl font-serif tracking-[0.3em] uppercase mb-4 italic">The Midnight Menu</h2>
+            <div className="h-[1px] w-12 bg-[#D4AF37] mx-auto"></div>
+          </div>
+
+          <div className="grid gap-1 border-y border-zinc-900">
+            {[
+              { name: "Nitro Lunar", desc: "Nitrogen-infused cold brew with a velvet head.", price: "950" },
+              { name: "The Obsidian Latte", desc: "Activated charcoal-infused espresso with oat milk.", price: "1100" },
+              { name: "Crescent Croissants", desc: "Saffron-infused pastries made in small batches.", price: "850" }
+            ].map((item, idx) => (
+              <motion.div 
+                key={idx}
+                whileHover={{ backgroundColor: "rgba(212, 175, 55, 0.02)" }}
+                className="group flex flex-col md:flex-row justify-between items-start md:items-center p-12 transition-all duration-700 cursor-pointer border-b border-zinc-900 last:border-0"
+              >
+                <div className="space-y-2">
+                  <h4 className="text-xl tracking-widest uppercase group-hover:text-white transition-colors">{item.name}</h4>
+                  <p className="text-zinc-600 text-xs tracking-wide">{item.desc}</p>
+                </div>
+                <div className="mt-4 md:mt-0 flex items-center gap-8">
+                  <span className="text-zinc-400 group-hover:text-[#D4AF37] transition-colors tracking-widest">{item.price}</span>
+                  <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Location (The Phase 8 Grid) */}
+      <section id="location" className="py-32 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-0 border border-zinc-900">
+          <div className="p-12 md:p-24 flex flex-col justify-center space-y-12">
+            <div>
+              <h2 className="text-4xl font-serif tracking-widest mb-2 uppercase">0.00° Latitude</h2>
+              <h2 className="text-4xl font-serif tracking-widest uppercase text-zinc-700 underline decoration-[#D4AF37]">Phase 8</h2>
+            </div>
+            
+            <div className="space-y-6 text-sm tracking-[0.2em] text-zinc-400 uppercase">
+              <div className="flex items-center gap-4">
+                <MapPin size={18} className="text-[#D4AF37]" />
+                <span>Adjacent to the Creek Coastline, DHA Phase 8</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <Clock size={18} className="text-[#D4AF37]" />
+                <span>Open until 2:00 AM — Every Night</span>
+              </div>
+            </div>
+
+            <button className="bg-white text-black px-8 py-4 text-[10px] tracking-[0.4em] font-bold uppercase w-fit hover:bg-[#D4AF37] transition-colors duration-500">
+              Get Directions
+            </button>
+          </div>
+
+          <div className="h-[400px] md:h-auto bg-zinc-900 relative grayscale contrast-125 opacity-50 hover:opacity-80 transition-opacity duration-1000">
+            {/* Minimalist Map Placeholder */}
+            <div className="absolute inset-0 flex items-center justify-center">
+               <div className="w-32 h-32 border border-zinc-700 rounded-full animate-ping opacity-20"></div>
+               <div className="absolute w-2 h-2 bg-[#D4AF37] rounded-full"></div>
+            </div>
+            <img 
+              src="https://images.unsplash.com/photo-1526644485012-362070d6521a?auto=format&fit=crop&q=80" 
+              alt="Map view" 
+              className="w-full h-full object-cover mix-blend-multiply"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 border-t border-zinc-900 text-center">
+        <p className="text-[10px] tracking-[0.8em] text-zinc-700 uppercase">
+          Lune Atelier © 2024 — Karachi, Pakistan
+        </p>
+      </footer>
+    </div>
+  );
+};
+
+export default LuneAtelier;
